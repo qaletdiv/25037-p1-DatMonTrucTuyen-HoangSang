@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Món Trực Tuyến</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Logo</div>
+        <nav class="main-menu">
+            <a href="#">Trang chủ</a>
+            <a href="#">Thực đơn & Đặt món</a>
+            <a href="#">Tin tức & Ưu đãi</a>
+            <a href="#">Hệ thống cửa hàng</a>
+        </nav>
+        <div class="user-area">
+            <button id="login-btn">Đăng nhập</button>
+            <button id="register-btn">Đăng ký</button>
+        </div>
+        <div class="cart">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <!-- Trang chủ -->
+        <section class="home-banner">
+            <h2>Slide món ăn đặc trưng</h2>
+            <button>Đặt món ngay</button>
+        </section>
+
+        <section class="about-us">
+            <h3>Về chúng tôi</h3>
+            <p>Giới thiệu thương hiệu và cam kết chất lượng.</p>
+        </section>
+
+        <section class="featured-products">
+            <h3>Sản phẩm nổi bật</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="phogakho.jpg" alt="Món ăn 1">
+                    <h4>Tên món 1</h4>
+                    <p>Giá: 50.000₫</p>
+                    <button>Thêm nhanh</button>
+                </div>
+                <div class="product-card">
+                    <img src="phobo.png" alt="Món ăn 2">
+                    <h4>Tên món 2</h4>
+                    <p>Giá: 70.000₫</p>
+                    <button>Thêm nhanh</button>
+                </div>
+                <!-- Thêm 2-4 món khác -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Hotline: 0123 456 789 | Email: contact@example.com</p>
+        <p>Liên kết mạng xã hội: Facebook | Instagram | Zalo</p>
+        <p>Chính sách bảo mật & Điều khoản sử dụng</p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-login">&times;</span>
+            <h3>Đăng nhập</h3>
+            <form id="login-form">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mật khẩu" required>
+                <button type="submit">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-register">&times;</span>
+            <h3>Đăng ký</h3>
+            <form id="register-form">
+                <input type="text" placeholder="Họ tên" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Mật khẩu" required>
+                <input type="password" placeholder="Nhập lại mật khẩu" required>
+                <button type="submit">Đăng ký</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
