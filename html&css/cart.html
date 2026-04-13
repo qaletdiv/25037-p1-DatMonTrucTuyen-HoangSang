@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giỏ hàng – Quê Hương</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">Quê Hương</div>
+  <nav class="main-menu">
+    <a href="index.html">Trang chủ</a>
+    <a href="products.html">Thực đơn & Đặt món</a>
+    <a href="#">Tin tức & Ưu đãi</a>
+    <a href="#">Hệ thống cửa hàng</a>
+  </nav>
+  <div class="user-area" id="user-area">
+    <button id="login-btn">Đăng nhập</button>
+    <button id="register-btn">Đăng ký</button>
+  </div>
+</header>
+
+<main>
+  <h2>Giỏ hàng của bạn</h2>
+  <div id="cart-items"></div>
+  <div id="cart-total"></div>
+  <button id="checkout-btn">Thanh toán</button>
+</main>
+
+<footer>
+  <p>Quê Hương – Hotline: 0123 456 789 | Email: contact@example.com</p>
+  <p>Liên kết mạng xã hội: Facebook | Instagram | Zalo</p>
+  <p>Chính sách bảo mật & Điều khoản sử dụng</p>
+</footer>
+
+<script>
+// Kiểm tra đăng nhập
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+if(!currentUser){
+  alert("Vui lòng đăng nhập để xem giỏ hàng!");
+  window.location.href = "index.html";
+}
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function renderCart(){
+  const cartItemsEl = document.getElementById('cart-items');
+  const cartTotalEl = document.getElementById('cart-total');
+  cartItemsEl.innerHTML = '';
+  if(cart.length===0){
+    cartItemsEl.innerHTML="<p>Giỏ hàng đang trống.</p>";
+    cartTotalEl.textContent="";
+    return;
+  }
+
+  let total = 0;
+  cart.forEach((item,index)=>{
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img src="images/${item.images[0]}" alt="${item.name}" width="100">
+      <h4>${item.name}</h4>
+      <p>Giá: ${item.price.toLocaleString()}₫</p>
+      <input type="number" value="${item.quantity}" min="1" id="qty-${index}">
+      <button id="remove-${index}">Xóa</button>
+    `;
+    cartItemsEl.appendChild(div);
+
+    total += item.price * item.quantity;
+
+    // Cập nhật số lượng
+    document.getElementById(`qty-${index}`).onchange = (e)=>{
+      cart[index].quantity = parseInt(e.target.value);
+      localStorage.setItem('cart',JSON.stringify(cart));
+      renderCart();
+    };
+
+    // Xóa sản phẩm
+    document.getElementById(`remove-${index}`).onclick = ()=>{
+      cart.splice(index,1);
+      localStorage.setItem('cart',JSON.stringify(cart));
+      renderCart();
+    };
+  });
+
+  cartTotalEl.textContent = "Tổng tiền: " + total.toLocaleString() + "₫";
+}
+
+document.getElementById('checkout-btn').onclick = ()=>{
+  if(cart.length===0){ alert("Giỏ hàng trống!"); return; }
+  alert("Thanh toán thành công!");
+  localStorage.removeItem('cart');
+  cart = [];
+  renderCart();
+};
+
+renderCart();
+</script>
+</body>
+</html>

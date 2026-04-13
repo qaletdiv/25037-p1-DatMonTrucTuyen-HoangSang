@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quê Hương – Đặt Món Online</title>
+  <title>Thực đơn & Ưu đãi – Quê Hương</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,19 +25,9 @@
   </header>
 
   <main>
-    <section class="home-banner">
-      <h2>Chào mừng đến với Quê Hương – Đặt Món Online!</h2>
-      <button onclick="window.location.href='products.html'">Đặt món ngay</button>
-    </section>
-
-    <section class="about-us">
-      <h3>Về chúng tôi</h3>
-      <p>Chúng tôi cam kết mang đến các món ăn ngon, tươi sạch và nhanh chóng đến tay khách hàng.</p>
-    </section>
-
-    <section class="featured-products">
-      <h3>Sản phẩm nổi bật</h3>
-      <div class="product-grid" id="featured-products"></div>
+    <section class="all-products">
+      <h2>Danh sách món ăn & Ưu đãi</h2>
+      <div class="product-grid" id="all-products"></div>
     </section>
   </main>
 
@@ -74,5 +64,35 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    const allProductsEl = document.getElementById('all-products');
+
+    const productsList = [
+      {id:1,name:"Phở gà kho",price:50000,img:"phogakho.jpg",date:"2026-04-10"},
+      {id:2,name:"Phở bò",price:70000,img:"phobo.png",date:"2026-04-09"},
+      {id:3,name:"Bún bò Huế",price:65000,img:"bunbohue.jpg",date:"2026-04-08"},
+      {id:4,name:"Cơm gà xối mỡ",price:60000,img:"comgaxoimo.jpg",date:"2026-04-07"},
+      {id:5,name:"Cơm sườn",price:70000,img:"comsuon.jpg",date:"2026-04-06"},
+      {id:6,name:"Hủ tiếu khô",price:55000,img:"hutieukho.jpg",date:"2026-04-05"}
+    ];
+
+    function renderAllProducts() {
+      allProductsEl.innerHTML = '';
+      productsList.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product-card';
+        div.innerHTML = `
+          <img src="images/${p.img}" alt="${p.name}">
+          <h4>${p.name}</h4>
+          <p>Ngày đăng: ${p.date}</p>
+          <p>Giá: ${p.price.toLocaleString()}₫</p>
+          <button onclick="addToCart(${p.id})">Thêm vào giỏ</button>
+        `;
+        allProductsEl.appendChild(div);
+      });
+    }
+
+    renderAllProducts();
+  </script>
 </body>
 </html>
